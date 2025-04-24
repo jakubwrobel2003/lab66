@@ -1,0 +1,37 @@
+﻿<Window x:Class="lab6.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:lab6"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <!-- Przyciski do funkcji -->
+        <Button Name="Funkcja1_Button" Content="Funkcja 1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="30" Margin="10" Click="Funkcja1_Button_Click"/>
+        <Button Name="Funkcja2_Button" Content="Funkcja 2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="30" Margin="10,50,0,0" Click="Funkcja2_Button_Click"/>
+        <Button Name="Funkcja3_Button" Content="Funkcja 3" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="30" Margin="10,100,0,0" Click="Funkcja3_Button_Click"/>
+
+        <!-- Etykiety do wyświetlania wyników -->
+        <Label Name="xLabel" Content="x: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,10,0,0"/>
+        <Label Name="yLabel" Content="y: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,50,0,0"/>
+        <Label Name="zLabel" Content="z: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,90,0,0"/>
+
+        <!-- Przyciski dla listy towarów -->
+        <Button x:Name="btnTowary" Content="Towary, Ilość > 5" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="30" Click="btnTowary_Click" Margin="20,197,0,0"/>
+        <Button x:Name="btnKategoria" Content="Liczba towarów w kategorii" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,238,0,0" Width="200" Height="30" Click="btnKategoria_Click"/>
+        <Button x:Name="btnCenaSrednia" Content="Towary powyżej średniej ceny" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,287,0,0" Width="200" Height="30" Click="btnCenaSrednia_Click"/>
+        <Button x:Name="btnKategoriaStatystyki" Content="Statystyki kategorii" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,331,0,0" Width="200" Height="30" Click="btnKategoriaStatystyki_Click"/>
+        <Button x:Name="btnNajdroższy" Content="Najdroższy towar" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="19,377,0,0" Width="200" Height="30" Click="btnNajdroższy_Click"/>
+
+        <!-- Etykieta dla wyników operacji na towarach -->
+        <Label x:Name="lblWynik" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="240,40,0,0" Width="500" Height="300"/>
+
+        <!-- ComboBox do wyboru kategorii -->
+        <ComboBox x:Name="comboBoxKategoria" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="20,180,0,0">
+            <ComboBoxItem Content="Elektronika"/>
+            <ComboBoxItem Content="Odzież"/>
+            <ComboBoxItem Content="Spożywcze"/>
+        </ComboBox>
+    </Grid>
+</Window>
