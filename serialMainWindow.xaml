@@ -1,0 +1,20 @@
+﻿<Window x:Class="lab.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:lab"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Button x:Name="btnMelduj" Content="Button" HorizontalAlignment="Left" Margin="343,103,0,0" VerticalAlignment="Top" Click="btnMelduj_Click"/>
+        <Button Content="btnCzytaj" HorizontalAlignment="Left" Margin="363,152,0,0" VerticalAlignment="Top"  Click="btnCzytaj_Click"/>
+        <ListBox x:Name="listBox" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="484,217,0,0"/>
+        <Label x:Name="labelB" Content="Label" HorizontalAlignment="Left" Margin="166,238,0,0" VerticalAlignment="Top" Height="67" Width="177"/>
+        <Button Content="ZAddPISZ" HorizontalAlignment="Left" Margin="460,85,0,0" VerticalAlignment="Top" Click="ZapiszXML_Click"/>
+        <Button Content="Wczytaj" HorizontalAlignment="Left" Margin="505,137,0,0" VerticalAlignment="Top" Click="WczytajXML_Click"/>
+        <Button Content="ZAPISZjons" HorizontalAlignment="Left" Margin="623,95,0,0" VerticalAlignment="Top" Click="ZapiszJSON_Click"/>
+        <Button Content="Wczytajjossn" HorizontalAlignment="Left" Margin="620,137,0,0" VerticalAlignment="Top" Click="WczytajJSON_Click"/>
+
+    </Grid>
+</Window>
