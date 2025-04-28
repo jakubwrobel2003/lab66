@@ -1,0 +1,150 @@
+// ==========================
+// GRUPA A - Klasa Kula
+// ==========================
+
+public class Kula
+{
+    private static Dictionary<string, double> gestosci = new Dictionary<string, double>
+    {
+        { "stal", 7850 },    // kg/m³
+        { "drewno", 600 }    // kg/m³
+    };
+
+    public double Promien { get; set; }
+    public string Material { get; set; }
+
+    public Kula(double promien, string material)
+    {
+        Promien = promien;
+        Material = material;
+    }
+
+    public double Masa()
+    {
+        double objetosc = (4.0 / 3.0) * Math.PI * Math.Pow(Promien, 3);
+        double gestosc = gestosci.ContainsKey(Material.ToLower()) ? gestosci[Material.ToLower()] : 1000;
+        return objetosc * gestosc;
+    }
+
+    public void ZmienPromien(Func<double, double> zmiana)
+    {
+        Promien = zmiana(Promien);
+    }
+}
+
+// ==========================
+// GRUPA B - Struktura Pies
+// ==========================
+
+public struct Pies
+{
+    public string Imie;
+    public int Wiek;
+    public string Rasa;
+}
+
+// ==========================
+// GRUPA C - Klasa Produkt
+// ==========================
+
+public class Produkt
+{
+    public string Nazwa { get; set; }
+    public double Cena { get; set; }
+    public string Kategoria { get; set; }
+}
+
+// ==========================
+// MainWindow.xaml.cs
+// (obsługuje wszystkie trzy grupy)
+// ==========================
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+
+namespace WpfApp1
+{
+    public partial class MainWindow : Window
+    {
+        List<Pies> psy = new List<Pies>
+        {
+            new Pies { Imie = "Reksio", Wiek = 5, Rasa = "Labrador" },
+            new Pies { Imie = "Azor", Wiek = 3, Rasa = "Labrador" },
+            new Pies { Imie = "Bella", Wiek = 4, Rasa = "Owczarek" },
+            new Pies { Imie = "Maks", Wiek = 2, Rasa = "Bulldog" }
+        };
+
+        Produkt[] produkty = new Produkt[]
+        {
+            new Produkt { Nazwa = "Mleko", Cena = 5.5, Kategoria = "Spożywcze" },
+            new Produkt { Nazwa = "Chleb", Cena = 4.0, Kategoria = "Spożywcze" },
+            new Produkt { Nazwa = "Młotek", Cena = 25.0, Kategoria = "Narzędzia" },
+            new Produkt { Nazwa = "Śrubokręt", Cena = 15.0, Kategoria = "Narzędzia" },
+            new Produkt { Nazwa = "Szampon", Cena = 12.5, Kategoria = "Kosmetyki" },
+            new Produkt { Nazwa = "Mydło", Cena = 7.0, Kategoria = "Kosmetyki" }
+        };
+
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            listBox.Items.Clear();
+
+            // ==========================
+            // GRUPA A - Obsługa kliknięcia dla Kuli
+            // ==========================
+
+            Kula kula1 = new Kula(0.5, "stal");
+            Kula kula2 = new Kula(0.3, "drewno");
+
+            kula1.ZmienPromien(p => p + 0.2);
+            kula2.ZmienPromien(p => p + 0.1);
+
+            listBox.Items.Add($"Kula ze stali - masa: {kula1.Masa():F2} kg");
+            listBox.Items.Add($"Kula z drewna - masa: {kula2.Masa():F2} kg");
+
+            // ==========================
+            // GRUPA B - Obsługa kliknięcia dla Psów
+            // ==========================
+
+            var wynikiPsy = from pies in psy
+                            group pies by pies.Rasa into grupa
+                            select new
+                            {
+                                Rasa = grupa.Key,
+                                Liczba = grupa.Count(),
+                                SredniWiek = grupa.Average(p => p.Wiek)
+                            };
+
+            listBox.Items.Add("--- Statystyki psów ---");
+            foreach (var wynik in wynikiPsy)
+            {
+                listBox.Items.Add($"Rasa: {wynik.Rasa}, Liczba: {wynik.Liczba}, Średni wiek: {wynik.SredniWiek:F1} lat");
+            }
+
+            // ==========================
+            // GRUPA C - Obsługa kliknięcia dla Produktów
+            // ==========================
+
+            var wynikiProdukty = produkty
+                .GroupBy(p => p.Kategoria)
+                .Select(g => new
+                {
+                    Kategoria = g.Key,
+                    Liczba = g.Count(),
+                    SredniaCena = g.Average(p => p.Cena)
+                });
+
+            listBox.Items.Add("--- Statystyki produktów ---");
+            foreach (var wynik in wynikiProdukty)
+            {
+                listBox.Items.Add($"Kategoria: {wynik.Kategoria}, Liczba: {wynik.Liczba}, Średnia cena: {wynik.SredniaCena:F2} zł");
+            }
+        }
+    }
+}
